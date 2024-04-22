@@ -42,14 +42,19 @@ while cap.isOpened():
 
                 # Check for scroll gesture
                 scroll_distance = ((index_tip.x - thumb_tip.x) ** 2 + (index_tip.y - thumb_tip.y) ** 2) ** 0.5
-                if scroll_distance < 0.05:  # Index and middle fingers are close enough to consider scrolling
+                if scroll_distance < 0.03:  # Index and middle fingers are close enough to consider scrolling
                     if prev_scroll_pos is not None:
-                        scroll_amount = (index_tip.y - prev_scroll_pos) * 1000  # Scale the scroll amount
+                        scroll_amount = (index_tip.y - prev_scroll_pos) * 3000  # Scale the scroll amount
                         pyautogui.scroll(int(scroll_amount))
                         cv2.putText(image, f'Scrolling: {int(scroll_amount)}', (10, 110), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
                     prev_scroll_pos = index_tip.y
                 else:
                     prev_scroll_pos = None
+
+                pinky_pinch_distance = ((pinky_tip.x - thumb_tip.x) ** 2 + (pinky_tip.y - thumb_tip.y) ** 2) ** 0.5
+                if pinky_pinch_distance < 0.03:
+                    cv2.putText(image, 'Exiting', (10, 150), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+                    pyautogui.press('esc')
 
             elif hand_label == 'Right':
                 # Check for pinching gesture for clicking
@@ -63,13 +68,19 @@ while cap.isOpened():
                     prev_pinching = False
 
                 # Check for pinching gesture for clicking
-                pinky_pinch_distance = ((middle_tip.x - thumb_tip.x) ** 2 + (middle_tip.y - thumb_tip.y) ** 2) ** 0.5
-                if pinky_pinch_distance < 0.03:
+                middle_pinch_distance = ((middle_tip.x - thumb_tip.x) ** 2 + (middle_tip.y - thumb_tip.y) ** 2) ** 0.5
+                if middle_pinch_distance < 0.03:
                     if not right_click:
                         pyautogui.rightClick()
                         right_click = True
                         cv2.putText(image, 'Right Clicking', (10, 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                     right_click = False
+
+                # Check for pinching gesture for clicking
+                pinky_pinch_distance = ((pinky_tip.x - thumb_tip.x) ** 2 + (pinky_tip.y - thumb_tip.y) ** 2) ** 0.5
+                if pinky_pinch_distance < 0.03:
+                    pyautogui.doubleClick()
+                    cv2.putText(image, 'Double Left Clicking', (10, 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
     cv2.imshow('Hand Tracking', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
     if cv2.waitKey(5) & 0xFF == 27:
