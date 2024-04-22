@@ -1,22 +1,52 @@
 # Hand Gesture Recognition for Cursor Control
 
-This project uses OpenCV, MediaPipe, and PyAutoGUI to enable hand gesture recognition for controlling the mouse cursor and performing various mouse actions like clicking and scrolling. The system utilizes a webcam to detect and track hand movements, translating these into cursor movements and clicks on the user's screen.
+This project uses `OpenCV`, `MediaPipe`, and `PyAutoGUI` to enable hand gesture recognition for controlling the mouse cursor and performing various mouse actions like clicking and scrolling. The system utilizes a webcam to detect and track hand movements, translating these into cursor movements and clicks on the user's screen.
 
 ## Installation
 
-Before running this project, ensure you have the following prerequisites installed on your system:
+Before running this project, ensure you have `Python` and `pip` installed on your system. Follow these steps to install the required dependencies:
 
-### Prerequisites
+### Setting Up a Virtual Environment (Optional but Recommended)
 
-- Python 3.7 or later
-- OpenCV
-- MediaPipe
-- PyAutoGUI
+It's recommended to use a virtual environment for Python projects to keep dependencies organized and separate from other projects. Here's how to set up and use a virtual environment:
 
-You can install the required packages using pip:
+Install `virtualenv` if you haven't installed it yet
 
 ```bash
-pip install opencv-python mediapipe pyautogui
+pip install virtualenv
+```
+
+Create a virtual environment
+```bash
+virtualenv venv
+```
+
+Activate the virtual environment
+- On Windows
+    ```bash
+    .\venv\Scripts\activate
+    ```
+- On macOS and Linux
+    ```bash
+    source venv/bin/activate
+    ```
+
+### Installing Dependencies
+
+Once the virtual environment is activated, install all required dependencies by running:
+
+```bash
+pip install -r requirements.txt
+```
+
+This command installs all the packages listed in the `requirements.txt` file, ensuring you have the correct versions needed to run the project.
+
+### Deactivating the Virtual Environment
+
+When you're done working on the project, you can `deactivate` the virtual environment by running:
+
+```bash
+deactivate
 ```
 
 ## Usage
@@ -24,7 +54,7 @@ pip install opencv-python mediapipe pyautogui
 To start the hand gesture recognition, run the main script from your command line:
 
 ```bash
-python hand_gesture_recognition.py
+python gesture_mouse_control.py
 ```
 
 
@@ -45,9 +75,4 @@ python hand_gesture_recognition.py
 ## Acknowledgments
 
 - This project utilizes the [MediaPipe](https://google.github.io/mediapipe/) framework for hand tracking.
-- Thanks to the contributors of the OpenCV and PyAutoGUI libraries for providing essential tools for image processing and GUI automation.
-
-## License
-
-This project is open-sourced under the MIT License. See the LICENSE file for more details.
-
+- Thanks to the contributors of the `OpenCV` and `PyAutoGUI` libraries for providing essential tools for image processing and GUI automation.
