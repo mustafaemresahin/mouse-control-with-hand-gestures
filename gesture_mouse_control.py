@@ -68,7 +68,7 @@ while cap.isOpened():
                     if not right_click:
                         pyautogui.rightClick()
                         right_click = True
-                        cv2.p 
+                        cv2.putText(image, 'Right Clicking', (10, 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                     right_click = False
 
     cv2.imshow('Hand Tracking', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
